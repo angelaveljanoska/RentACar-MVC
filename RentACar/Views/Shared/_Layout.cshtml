@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - RentACar</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/custom.css" />
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">RentACar</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <div class="navbar-nav flex-grow-1 my-navbar">
+                        <div class="navbar-child">
+                            <span class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </span>
+
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <span class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="Index">Cars</a>
+                                </span>
+                            }
+                            @if (User.Identity.IsAuthenticated && (User.IsInRole("User")))
+                            {
+                                <span class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Cars" asp-action="MyRents">My rented cars</a>
+                                </span>
+                            }
+                        </div>
+                        <div class="navbar-child">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <span class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Logout">Log out</a>
+                                </span>
+                            }
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <span class="nav-item">
+                                    <a class="nav-link text-dark" href="/Identity/Account/Login">Log In</a>
+                                </span>
+                                <span class="nav-item">
+                                    <a class="nav-link text-dark" href="/Identity/Account/Register">Sign Up </a>
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container" style="color: #aaffff">
+            &copy; 2021 - RentACar - <span style="font-weight: bold">Angela Veljanoska</span>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

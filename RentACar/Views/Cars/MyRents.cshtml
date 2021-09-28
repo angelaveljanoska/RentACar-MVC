@@ -1,0 +1,23 @@
+﻿@model IEnumerable<RentACar.Models.Car>
+
+@{
+    ViewData["Title"] = "My rented cars";
+}
+<div class="rent-container" style="display: flex; flex-direction: column !important; align-items: center;">
+    <h3 style="color: grey;">My rented cars</h3>
+
+    @foreach (var car in Model)
+    {
+
+        <div class="col">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="~/images/@car.Picture" alt="Car Picture">
+                <div class="card-body">
+                    <h5 class="card-title">@car.Brand @car.Model</h5>
+                    <p class="card-text">Year of manufacture: @car.YearOfManufacture<br />Price per day: $@car.PricePerDay</p>
+                    <a class="btn btn-primary" asp-action="ReturnCar" asp-route-id="@car.Id">Return car</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

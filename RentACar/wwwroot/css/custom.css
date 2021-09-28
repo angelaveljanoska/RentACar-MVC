@@ -1,0 +1,62 @@
+﻿body {
+    background-image: url("../staticImages/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.header-title {
+    box-shadow: -1px 15px 40px 0px rgba(255,255,255,0.75);
+    background-color: rgb(0, 255, 255, 0.15);
+    border-radius: 15px
+}
+
+.header-title > h1 {
+    font-weight: lighter;
+}
+
+.my-navbar {
+    display: flex!important;
+    flex-direction: row!important;
+    justify-content: space-between!important;
+}
+
+.navbar-child {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.rent-container {
+    background-color: rgb(0, 190, 225, 0.15);
+    padding: 50px;
+    /*max-width: 30vw;*/
+    float: left;
+}
+.card {
+    background-color: rgb(180,188,190,0.85);
+}
+.edit-class {
+    background-color: rgb(204,204,204,0.55);
+    padding: 50px;
+}
+
+.total-price {
+    background-color: rgb(255, 255, 255, 0.25);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.55em;
+}
+
+.centered-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 80vh;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-image-custom {
+    height: 200px;
+    object-fit: cover;
+}

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<RentACar.Models.Car>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h4>The cars we drive say a lot about us. Choose wisely.</h4>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a class="btn btn-primary" style="background-color: dimgrey" asp-action="Create">Create New Car</a>
+    </p>
+}
+<a class="btn btn-primary" href="@Url.Action("Index", "Cars", new { sortOrder = ViewBag.BrandSortParm })">Sort by Brand</a>
+<a class="btn btn-primary" href="@Url.Action("Index", "Cars", new { sortOrder = ViewBag.PriceSortParm })">Sort by Price</a>
+<a class="btn btn-primary" href="@Url.Action("Index", "Cars", new { sortOrder = ViewBag.AvailableSortParm })">Sort by Availability</a>
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-column-gap: 10px; grid-row-gap: 50px; background-color: rgb(255,204,204,0.30); padding: 50px; margin-top: 30px">
+    @foreach (var item in Model)
+    {
+        <div class="col">
+            <div class="card" style="width: 18rem; ">
+                <img class="card-img-top card-image-custom" src="~/images/@item.Picture" alt="Car Picture">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        @item.Brand
+                    </h5>
+
+                    <h5>@item.Model</h5>
+
+                    <p class="card-text">Year of manufacture: @item.YearOfManufacture<br /> Price per day: $@item.PricePerDay</p>
+                    @if (User.IsInRole("User"))
+                    {
+                        @if (item.Availability)
+                        {
+                            <a asp-action="Rent" asp-route-id="@item.Id" class="btn btn-primary">Rent</a>
+                        }
+                        @if (!item.Availability)
+                        {
+                            <button disabled class="btn btn-secondary">Not available for rent.</button>
+                        }
+                    }
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a class="btn btn-primary ml-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                        <a class="btn btn-primary ml-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                        <a class="btn btn-primary ml-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    }
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
